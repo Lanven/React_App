@@ -61,3 +61,6 @@ button.on {
 button.off {
     color: red;
 }
+
+a { margin:5px;}
+.active{ color: red;font-weight: bold;}
