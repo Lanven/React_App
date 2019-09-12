@@ -48,3 +48,16 @@ ol, ul {
 .game-info {
     margin-left: 20px;
 }
+
+button {
+    width: 100px;
+    height: 30px;
+}
+
+button.on {
+    color: green;
+}
+
+button.off {
+    color: red;
+}
