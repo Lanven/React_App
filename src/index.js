@@ -9,12 +9,12 @@ import App from "./app";
 const reducer = (state, action) => {
     let newState = Object.assign({}, state);
     if (action.type === 'SET_VALUE') {
-        newState = Object.assign(newState, { value: action.value.trim() });
+        newState = {...state, value: action.value.trim()}
     }
+
     if (action.type === 'SET_NAME') {
         newState = Object.assign(newState, { name: action.value.trim() });
     }
-
 
     return newState;
 }
