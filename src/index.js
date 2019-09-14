@@ -1,31 +1,19 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ReactRouterDOM from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+
 import './index.css';
 
+import About from "./components/about";
 
-const Router = ReactRouterDOM.BrowserRouter;
-const Route = ReactRouterDOM.Route;
-const Switch = ReactRouterDOM.Switch;
-const Link = ReactRouterDOM.Link;
-const NavLink = ReactRouterDOM.NavLink;
-
-class Main extends React.Component{
+class Main extends Component{
     render(){
         return <h2>Главная</h2>;
     }
 }
 
-class About extends React.Component{
-    render(){
-        const id= this.props.match.params.id;
-        const name = this.props.match.params.name;
-
-        return <h2>Id: {id}, Name: {name}</h2>;
-    }
-}
-class NotFound extends React.Component{
+class NotFound extends Component{
     render(){
         return <h2>Ресурс не найден</h2>;
     }
@@ -41,11 +29,11 @@ const propsValues = {
     ]
 }
 
-function Item(props) {
-    return <li>{props.name}</li>
+const Item = ({name}) => {
+    return <li>{name}</li>
 }
 
-class SearchPlugin extends React.Component {
+class SearchPlugin extends Component {
     constructor(props) {
         super(props);
         this.onTextChanged = this.onTextChanged.bind(this)
@@ -61,7 +49,7 @@ class SearchPlugin extends React.Component {
     }
 }
 
-class ItemList extends React.Component {
+class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {items: this.props.data.items};
@@ -105,11 +93,11 @@ const phones =[
     {id: 3, name: "HTC U Ultra"}
 ];
 
-class Phone extends React.Component {
+class Phone extends Component {
     render() {
         const prodId = this.props.match.params.id;
         let phone;
-        for (var i=0; i<phones.length; i++) {
+        for (let i=0; i<phones.length; i++) {
             if (phones[i].id === prodId) {
                 phone = phones[i];
                 break;
@@ -124,7 +112,7 @@ class Phone extends React.Component {
     }
 }
 
-class PhonesList extends React.Component {
+class PhonesList extends Component {
     render() {
         return (
             <div>
@@ -146,13 +134,13 @@ class PhonesList extends React.Component {
     }
 }
 
-class Tablet extends React.Component {
+class Tablet extends Component {
     render() {
         return <h3>Tablets</h3>
     }
 }
 
-class Products extends React.Component {
+class Products extends Component {
     render() {
         return (
             <div>
@@ -180,7 +168,7 @@ function Square(props) {
     )
 }
 
-class Board extends React.Component {
+class Board extends Component {
     renderSquare(i) {
         return <Square
             value={this.props.squares[i]}
@@ -211,7 +199,7 @@ class Board extends React.Component {
     }
 }
 
-class Game extends React.Component {
+class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -291,8 +279,12 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    {winner &&
-                    <button onClick={() => this.clearHistory()} style={{backgroundColor: 'green', borderColor: 'green', color: 'white'}}>Начать сначала</button>
+                    {
+                            // (()=>{
+                            //     if (winner)
+                            //         return <button onClick={() => this.clearHistory()} style={{backgroundColor: 'green', borderColor: 'green', color: 'white'}}>Начать сначала</button>
+                            // })()
+                        winner && <button onClick={() => this.clearHistory()} style={{backgroundColor: 'green', borderColor: 'green', color: 'white'}}>Начать сначала</button>
                     }
                     <ol>{moves}</ol>
                 </div>
@@ -323,7 +315,7 @@ function calculateWinner(squares) {
 
 // ========================================
 
-class Nav extends React.Component {
+class Nav extends Component {
     render() {
         return (
             <div>
@@ -342,7 +334,7 @@ class Nav extends React.Component {
 }
 
 ReactDOM.render (
-    <Router>
+    <BrowserRouter>
         <div>
             <Nav/>
             <Switch>
@@ -354,7 +346,7 @@ ReactDOM.render (
                 <Route component={NotFound}/>
             </Switch>
         </div>
-    </Router>,
+    </BrowserRouter>,
     document.getElementById("menu")
 )
 
@@ -369,7 +361,7 @@ function tick() {
 
 setInterval(tick, 1000);
 
-class Headers extends React.Component {
+class Headers extends Component {
     constructor(props) {
         super(props);
         this.state = {welcome: "Welcome!"};
@@ -389,7 +381,7 @@ function FullName(props) {
     return <p>FullName: {props.fullName}</p>
 }
 
-class UserInfo extends React.Component {
+class UserInfo extends Component {
     render() {
         const user = {
             id: 5,
@@ -430,7 +422,7 @@ ReactDOM.render(
     }
 )
 
-class ClickButton extends React.Component {
+class ClickButton extends Component {
     constructor(props) {
         super(props);
         this.state = {class: "off", label: "Click"};
@@ -456,7 +448,7 @@ ReactDOM.render(
     document.getElementById("button")
 )
 
-class AgeField extends React.Component {
+class AgeField extends Component {
     constructor(props) {
         super(props);
         this.state = {age: props.value, valid: this.validateAge(props.value)};
@@ -483,7 +475,7 @@ class AgeField extends React.Component {
     }
 }
 
-class UserForm extends React.Component {
+class UserForm extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
